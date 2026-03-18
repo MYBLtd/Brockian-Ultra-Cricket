@@ -1,0 +1,47 @@
+{
+  "screens": {
+    "weather_landscape_main": {
+      "layout": "landscape_split_footer",
+      "title": "Weather Landscape Main",
+      "regions": {
+        "left": ["outside_summary_main"],
+        "right_top": ["map_panel_main"],
+        "right_bottom": ["wind_strip_main"],
+        "footer": ["daily_forecast_main"]
+      }
+    },
+    "climate_landscape_main": {
+      "layout": "landscape_split",
+      "title": "Climate Landscape Main",
+      "regions": {
+        "left": ["outside_summary_main"],
+        "right_top": ["indoor_grid_main"],
+        "right_bottom": ["wind_strip_main"]
+      }
+    },
+    "weather_dashboard_main": {
+      "layout": "dashboard_two_column_footer",
+      "title": "Weather Dashboard Main",
+      "regions": {
+        "left_top": ["outside_summary_main"],
+        "left_middle": ["wind_strip_main"],
+        "right_top": ["windy_embed_wind"],
+        "right_middle": ["windy_embed_rain"],
+        "footer": ["daily_forecast_main"]
+      }
+    },
+    "weather_dashboard_mobile": {
+    "layout": "mobile_stack",
+    "title": "Weather Dashboard Mobile",
+    "regions": {
+      "main": [
+        "outside_summary_main",
+        "windy_embed_wind",
+        "wind_strip_main",
+        "windy_embed_rain",
+        "daily_forecast_main"
+        ]
+      }
+   }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "components": {
+    "outside_summary_main": {
+      "type": "outside_summary",
+      "source": "weather_current",
+      "options": {
+        "temperature_color_mode": "actual",
+        "temperature_color_scale": "comfort_default",
+        "wind_unit": "bft",
+        "show_precip": true,
+        "show_pressure": true,
+        "show_humidity": true,
+        "show_wind_compass": true,
+        "show_updated_at": false,
+        "layout_variant": "hero_split"
+      }
+    },
+    "indoor_grid_main": {
+      "type": "indoor_grid",
+      "source": "indoor_payload",
+      "options": {
+        "page": 1,
+        "columns": 4,
+        "rows": 4,
+        "show_empty_cells": true,
+        "temperature_decimals": 1,
+        "humidity_decimals": 0,
+        "style_variant": "panel"
+      }
+    },
+    "wind_strip_main": {
+      "type": "wind_strip",
+      "source": "weather_hourly",
+      "options": {
+        "hours": 48,
+        "mode": "gusts",
+        "unit": "bft",
+        "show_direction": true,
+        "show_hour": true,
+        "show_numeric_secondary": false,
+        "style_variant": "panel"
+      }
+    },
+    "daily_forecast_main": {
+      "type": "daily_forecast",
+      "source": "weather_daily",
+      "options": {
+        "days": 4,
+        "wind_mode": "gust_max",
+        "wind_unit": "bft",
+        "show_precip_probability": true,
+        "show_direction": false,
+        "show_day_label": true,
+        "style_variant": "cards"
+      }
+    },
+    "map_panel_main": {
+      "type": "map_panel",
+      "source": "overview_payload",
+      "options": {
+        "mode": "static_asset",
+        "fit": "contain",
+        "show_location_marker": true,
+        "overlay": "none",
+        "style_variant": "panel"
+      }
+    },
+    "windy_embed_wind": {
+      "type": "web_embed",
+      "options": {
+        "title": "Windkaart",
+        "provider": "windy",
+        "embed_type": "iframe",
+        "variant": "wind",
+        "url": "https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=%C2%B0C&metricWind=bft&zoom=5&overlay=wind&product=ecmwf&level=surface&lat=56.45964946031108&lon=13.633502826328698&pressure=true&message=true"
+      }
+    },
+    "windy_embed_rain": {
+      "type": "web_embed",
+      "options": {
+        "title": "Neerslagkaart",
+        "provider": "windy",
+        "embed_type": "iframe",
+        "variant": "rain",
+        "url": "https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=%C2%B0C&metricWind=bft&zoom=5&overlay=rain&product=ecmwf&level=surface&lat=56.45964946031108&lon=13.633502826328698&pressure=true&message=true"
+      }
+    },
+    "wind_compass_test": {
+      "type": "wind_compass",
+      "source": "weather_current",
+      "options": {
+        "title": "Windroos"
+      }
+    }
+  }
+}

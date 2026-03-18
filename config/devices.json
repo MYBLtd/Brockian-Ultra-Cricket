@@ -1,0 +1,38 @@
+{
+  "devices": {
+    "office_browser": {
+      "mode": "web",
+      "screen": "weather_dashboard_main",
+      "theme": "dark_default",
+      "orientation": "landscape",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "refresh_seconds": 30
+    },
+    "waveshare_hallway": {
+      "mode": "bitmap",
+      "screen": "climate_landscape_main",
+      "theme": "dark_default",
+      "orientation": "landscape",
+      "resolution": {
+        "width": 800,
+        "height": 480
+      },
+      "refresh_seconds": 60
+    },
+    "iphone_browser": {
+      "mode": "web",
+      "renderer": "web-desktop",
+      "screen": "weather_dashboard_mobile",
+      "theme": "dark_default",
+      "orientation": "portrait",
+      "resolution": {
+        "width": 430,
+        "height": 932
+      },
+      "refresh_seconds": 30
+    }
+  }
+}
