@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
-	"sensor-panel-ux-server/internal/app"
-	"sensor-panel-ux-server/internal/ha"
-	"sensor-panel-ux-server/internal/support"
+	"buc/internal/app"
+	"buc/internal/ha"
+	"buc/internal/support"
 )
 
 func SourceHandler(a *app.App) http.HandlerFunc {

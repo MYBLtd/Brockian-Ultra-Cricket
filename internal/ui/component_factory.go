@@ -3,7 +3,7 @@ package ui
 import (
 	"fmt"
 
-	"sensor-panel-ux-server/internal/config"
+	"buc/internal/config"
 )
 
 func BuildComponent(

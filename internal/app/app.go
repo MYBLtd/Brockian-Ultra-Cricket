@@ -1,8 +1,8 @@
 package app
 
 import (
-	"sensor-panel-ux-server/internal/config"
-	"sensor-panel-ux-server/internal/ha"
+	"buc/internal/config"
+	"buc/internal/ha"
 )
 
 type App struct {

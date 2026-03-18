@@ -1,12 +1,12 @@
 package ui
 
 import (
-	"sensor-panel-ux-server/internal/app"
-	"sensor-panel-ux-server/internal/config"
+	"buc/internal/app"
+	"buc/internal/config"
 )
 
 type DeviceModel struct {
-	Device DeviceMeta  `json:"device"`
+	Device DeviceMeta   `json:"device"`
 	Screen *ScreenModel `json:"screen"`
 }
 

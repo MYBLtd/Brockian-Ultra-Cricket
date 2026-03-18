@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"time"
 
-	"sensor-panel-ux-server/internal/app"
-	"sensor-panel-ux-server/internal/support"
+	"buc/internal/app"
+	"buc/internal/support"
 )
 
 func HealthHandler(a *app.App) http.HandlerFunc {

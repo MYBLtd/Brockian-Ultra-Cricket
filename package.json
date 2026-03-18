@@ -1,4 +1,5 @@
 {
+  "name": "brockian-ultra-cricket",
   "dependencies": {
     "echarts": "^6.0.0"
   }

@@ -4,12 +4,12 @@
 # memory.md
 
 ## Project
-HA dashboard / sensor panel UX server
+HA dashboard / Brockian Ultra-Cricket (BUC)
 
 ## Current architectural position
 The project now has a clear split between:
 - Home Assistant as the stable data and automation platform
-- a separate UX server on a dedicated VM as the presentation layer
+- a separate BUC server on a dedicated VM as the presentation layer
 
 The Home Assistant host should stay clean and easy to maintain. Extra scripts, renderers, and UI logic should not run on the HA host.
 
@@ -28,16 +28,16 @@ It can produce useful dashboards and debug views, but it is not the best place t
 
 ### Hard split
 - HA server delivers data
-- UX server consumes HA data and renders output
-- clients consume the UX server, not HA directly where avoidable
+- BUC consumes HA data and renders output
+- clients consume BUC, not HA directly where avoidable
 
-### UX server hosting choice
+### BUC hosting choice
 - Apache2 is the chosen web server foundation
-- JSON is preferred over YAML for UX server config
-- root path planned for the UX server project: `/fs01/sensor_panel_ux-server`
+- JSON is preferred over YAML for BUC config
+- earlier internal working directories used the `sensor_panel_ux-server` name; the public repository identity is now BUC
 
 ### Configuration philosophy
-The UX server config is semantic and split into:
+The BUC config is semantic and split into:
 - `sources.json`
 - `components.json`
 - `screens.json`
@@ -48,7 +48,7 @@ Meaning and defaults belong in config.
 Visual realization belongs in theme and renderer.
 CSS is only the last presentation layer, not the source of semantics.
 
-## UX server model
+## BUC model
 
 ### Sources
 Primary current and forecast data sources in HA:
@@ -125,10 +125,10 @@ This dashboard is considered a useful debug and family view, not the final panel
 
 ## Windy decision
 The project should avoid dependency on abandoned or fragile one-maintainer custom weather map cards when possible.
-Official Windy embeds inside HA or the UX server are acceptable for browser-oriented views.
+Official Windy embeds inside HA or BUC are acceptable for browser-oriented views.
 
-## UX output modes
-The UX server is expected to support at least two output modes:
+## BUC output modes
+BUC is expected to support at least two output modes:
 - web output for browsers, TVs, tablets, and debug views
 - bitmap or image output for embedded display clients such as Waveshare/ESP32-type screens
 
@@ -171,7 +171,7 @@ Each component envelope contains:
 12. bitmap renderer
 
 ## Practical 
-Initialized a git repository at `/fs01/sensor_panel_ux-server`. Architecture documents and config examples are versioned.
+The project originally lived in an internal repository path named `sensor_panel_ux-server`. That history is only relevant when interpreting older notes or deployment references.
 
 ## Confirmed frontend direction
 

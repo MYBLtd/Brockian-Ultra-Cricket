@@ -25,6 +25,7 @@ Thumbs.db
 # IDEs
 .vscode/
 .idea/
+AGENTS.md
 
 # Generated caches
 .cache/

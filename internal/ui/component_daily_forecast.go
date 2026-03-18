@@ -3,7 +3,7 @@ package ui
 import (
 	"time"
 
-	"sensor-panel-ux-server/internal/config"
+	"buc/internal/config"
 )
 
 func BuildDailyForecast(
@@ -35,7 +35,7 @@ func BuildDailyForecast(
 	env.Resolved["display_wind_label"] = "Wind"
 	env.Resolved["display_wind_unit"] = windUnit
 	env.Resolved["display_wind_field"] = "wg_bft_max"
-        env.Resolved["display_gust_label"] = "Piek"
+	env.Resolved["display_gust_label"] = "Piek"
 
 	if windMode == "wind_max" && windUnit == "bft" {
 		env.Resolved["display_wind_label"] = "Wind"
@@ -58,7 +58,6 @@ func BuildDailyForecast(
 		env.Resolved["items"] = []interface{}{}
 		return env
 	}
-
 
 	out := make([]interface{}, 0, daysLimit)
 	for i, item := range rawDays {
@@ -90,27 +89,27 @@ func BuildDailyForecast(
 
 		row["icon_key"] = iconKeyFromWeatherCode(obj["weather_code"])
 		if windUnit == "bft" {
-	    row["wind_value"] = obj["ws_bft_max"]
-	    if v, exists := obj["wg_bft_max"]; exists && v != nil {
-		row["gust_value"] = v
-	    } else {
-		row["gust_value"] = obj["ws_bft_max"]
-	    }
-	} else {
-	    row["wind_value"] = obj["ws_max"]
-	    if v, exists := obj["wg_max"]; exists && v != nil {
-		row["gust_value"] = v
-	    } else {
-		row["gust_value"] = obj["ws_max"]
-	    }
-	}
-
-			out = append(out, row)
+			row["wind_value"] = obj["ws_bft_max"]
+			if v, exists := obj["wg_bft_max"]; exists && v != nil {
+				row["gust_value"] = v
+			} else {
+				row["gust_value"] = obj["ws_bft_max"]
+			}
+		} else {
+			row["wind_value"] = obj["ws_max"]
+			if v, exists := obj["wg_max"]; exists && v != nil {
+				row["gust_value"] = v
+			} else {
+				row["gust_value"] = obj["ws_max"]
+			}
 		}
 
-		env.Resolved["items"] = out
-		return env
+		out = append(out, row)
 	}
+
+	env.Resolved["items"] = out
+	return env
+}
 
 func iconKeyFromWeatherCode(v interface{}) string {
 	code, ok := intFromAnyUI(v)

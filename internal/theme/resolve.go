@@ -3,7 +3,7 @@ package theme
 import (
 	"fmt"
 
-	"sensor-panel-ux-server/internal/config"
+	"buc/internal/config"
 )
 
 type ResolvedTheme struct {

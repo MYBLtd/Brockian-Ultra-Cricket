@@ -3,7 +3,7 @@ package ui
 import (
 	"time"
 
-	"sensor-panel-ux-server/internal/support"
+	"buc/internal/support"
 )
 
 func stringOption(m map[string]interface{}, key, fallback string) string {

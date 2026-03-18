@@ -3,9 +3,9 @@ package ui
 import (
 	"time"
 
-	"sensor-panel-ux-server/internal/app"
-	"sensor-panel-ux-server/internal/ha"
-	"sensor-panel-ux-server/internal/theme"
+	"buc/internal/app"
+	"buc/internal/ha"
+	"buc/internal/theme"
 )
 
 func BuildScreen(a *app.App, screenName, themeName, mode string) (*ScreenModel, error) {

@@ -3,7 +3,7 @@ package httpapi
 import (
 	"net/http"
 
-	"sensor-panel-ux-server/internal/app"
+	"buc/internal/app"
 )
 
 func Router(a *app.App) http.Handler {

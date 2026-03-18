@@ -3,7 +3,7 @@ package ha
 import (
 	"sort"
 
-	"sensor-panel-ux-server/internal/support"
+	"buc/internal/support"
 )
 
 func BuildIndoorPayload(name string, entity *EntityState) SourceResult {

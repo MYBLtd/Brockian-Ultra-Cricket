@@ -3,9 +3,9 @@ package ui
 import (
 	"fmt"
 
-	"sensor-panel-ux-server/internal/config"
-	"sensor-panel-ux-server/internal/support"
-	"sensor-panel-ux-server/internal/theme"
+	"buc/internal/config"
+	"buc/internal/support"
+	"buc/internal/theme"
 )
 
 func BuildOutsideSummary(
@@ -58,32 +58,32 @@ func BuildOutsideSummary(
 		env.Status.Warnings = append(env.Status.Warnings, "missing temperature value for color resolution")
 	}
 
-if windUnit == "bft" {
-    if v, exists := data["ws_bft"]; exists && v != nil {
-	env.Resolved["wind_display_value"] = v
-	env.Resolved["wind_display_unit"] = "bft"
-    } else if v, exists := data["ws"]; exists && v != nil {
-	env.Resolved["wind_display_value"] = v
-	env.Resolved["wind_display_unit"] = "km/h"
-    }
+	if windUnit == "bft" {
+		if v, exists := data["ws_bft"]; exists && v != nil {
+			env.Resolved["wind_display_value"] = v
+			env.Resolved["wind_display_unit"] = "bft"
+		} else if v, exists := data["ws"]; exists && v != nil {
+			env.Resolved["wind_display_value"] = v
+			env.Resolved["wind_display_unit"] = "km/h"
+		}
 
-    if v, exists := data["wg_bft"]; exists && v != nil {
-	env.Resolved["gust_display_value"] = v
-	env.Resolved["gust_display_unit"] = "bft"
-    } else if v, exists := data["wg"]; exists && v != nil {
-	env.Resolved["gust_display_value"] = v
-	env.Resolved["gust_display_unit"] = "km/h"
-    }
-} else {
-    if v, exists := data["ws"]; exists && v != nil {
-	env.Resolved["wind_display_value"] = v
-	env.Resolved["wind_display_unit"] = "km/h"
-    }
-    if v, exists := data["wg"]; exists && v != nil {
-	env.Resolved["gust_display_value"] = v
-	env.Resolved["gust_display_unit"] = "km/h"
-    }
-}
+		if v, exists := data["wg_bft"]; exists && v != nil {
+			env.Resolved["gust_display_value"] = v
+			env.Resolved["gust_display_unit"] = "bft"
+		} else if v, exists := data["wg"]; exists && v != nil {
+			env.Resolved["gust_display_value"] = v
+			env.Resolved["gust_display_unit"] = "km/h"
+		}
+	} else {
+		if v, exists := data["ws"]; exists && v != nil {
+			env.Resolved["wind_display_value"] = v
+			env.Resolved["wind_display_unit"] = "km/h"
+		}
+		if v, exists := data["wg"]; exists && v != nil {
+			env.Resolved["gust_display_value"] = v
+			env.Resolved["gust_display_unit"] = "km/h"
+		}
+	}
 
 	if label, lok := data["wd_label"].(string); lok {
 		if wd, wok := support.ToFloat(data["wd"]); wok {

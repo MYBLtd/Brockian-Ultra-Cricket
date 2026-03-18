@@ -3,7 +3,7 @@ package ha
 import (
 	"time"
 
-	"sensor-panel-ux-server/internal/support"
+	"buc/internal/support"
 )
 
 func BuildWeatherDaily(name string, entity *EntityState) SourceResult {

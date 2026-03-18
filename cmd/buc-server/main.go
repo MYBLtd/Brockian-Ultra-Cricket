@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"os"
 
-	"sensor-panel-ux-server/internal/app"
-	"sensor-panel-ux-server/internal/config"
-	"sensor-panel-ux-server/internal/ha"
-	"sensor-panel-ux-server/internal/httpapi"
+	"buc/internal/app"
+	"buc/internal/config"
+	"buc/internal/ha"
+	"buc/internal/httpapi"
 )
 
 func main() {
@@ -27,7 +27,7 @@ func main() {
 
 	router := httpapi.Router(application)
 
-	log.Printf("sensor-panel-ux-server listening on %s", listenAddr)
+	log.Printf("buc-server listening on %s", listenAddr)
 	if err := http.ListenAndServe(listenAddr, router); err != nil {
 		log.Fatalf("server failed: %v", err)
 	}

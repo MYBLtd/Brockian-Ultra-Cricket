@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"strings"
 
-	"sensor-panel-ux-server/internal/app"
-	"sensor-panel-ux-server/internal/support"
-	"sensor-panel-ux-server/internal/ui"
+	"buc/internal/app"
+	"buc/internal/support"
+	"buc/internal/ui"
 )
 
 func DeviceHandler(a *app.App) http.HandlerFunc {

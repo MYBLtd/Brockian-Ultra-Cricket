@@ -2,18 +2,18 @@
 
 ```md
 # Functional Specification Document (FSD)
-## sensor_panel_ux-server
+## Brockian Ultra-Cricket (BUC)
 
 ## 1. Purpose and Scope
 
 ### 1.1 Purpose
-The purpose of the UX server is to provide a dedicated presentation layer on top of Home Assistant for:
+The purpose of Brockian Ultra-Cricket (BUC) is to provide a dedicated presentation layer on top of Home Assistant for:
 
 - browser-based dashboards
 - panel-style interfaces
 - bitmap/image-based embedded display clients
 
-The UX server exists because Home Assistant is suitable as a data and automation platform, but is not the preferred final engine for appliance-like, pixel-conscious panel UX.
+BUC exists because Home Assistant is suitable as a data and automation platform, but is not the preferred final engine for appliance-like, pixel-conscious panel UX.
 
 ### 1.2 Scope
 In scope for v1:
@@ -49,7 +49,7 @@ Responsible for:
 - normalized weather and sensor entities
 - IoT state and services
 
-#### UX server
+#### BUC server
 Responsible for:
 
 - semantic screen composition
@@ -68,9 +68,9 @@ Expected to be simple consumers:
 
 ### 2.2 Data flow
 1. Home Assistant fetches and normalizes source data
-2. UX server reads normalized HA entities
-3. UX server adapts these entities into normalized source objects
-4. UX server assembles screen and device models
+2. BUC reads normalized HA entities
+3. BUC adapts these entities into normalized source objects
+4. BUC assembles screen and device models
 5. Renderers transform screen/device models into concrete UI output
 
 ---
@@ -93,7 +93,7 @@ The system shall provide lightweight browser entry points under `/ui/*`.
 The system shall support bitmap or image-oriented output under `/render/*`.
 
 ### 3.6 Graceful degradation
-If a source or component cannot be fully resolved, the UX server shall prefer partial output with warnings rather than full failure where practical.
+If a source or component cannot be fully resolved, BUC shall prefer partial output with warnings rather than full failure where practical.
 
 ### 3.90 Visuele elementen
 Nieuwe visuele componenten die zowel browser- als embedded-output nodig hebben, krijgen bij voorkeur een renderer-onafhankelijk model en een renderpad dat server-side gegenereerd kan worden.
@@ -209,7 +209,7 @@ Clients should prefer `/api/device/{name}` and `/render/device/{name}.png` over 
 ## 6. Protocol Descriptions
 
 ### 6.1 JSON configuration protocol
-All UX server configuration shall be JSON-based.
+All BUC configuration shall be JSON-based.
 Configuration is semantic, not pixel-based.
 
 ### 6.2 Source normalization protocol
@@ -255,4 +255,4 @@ The current implementation already demonstrates:
 - current, hourly, and daily weather presentation
 - a first risk-oriented 48h gust matrix
 
-This confirms the architectural split between Home Assistant and the UX server.
+This confirms the architectural split between Home Assistant and BUC.
