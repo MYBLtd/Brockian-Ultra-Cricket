@@ -9,7 +9,7 @@
         "width": 1920,
         "height": 1080
       },
-      "refresh_seconds": 30
+      "refresh_seconds": 300
     },
     "waveshare_hallway": {
       "mode": "bitmap",
@@ -20,7 +20,7 @@
         "width": 800,
         "height": 480
       },
-      "refresh_seconds": 60
+      "refresh_seconds": 300
     },
     "iphone_browser": {
       "mode": "web",
@@ -32,7 +32,7 @@
         "width": 430,
         "height": 932
       },
-      "refresh_seconds": 30
+      "refresh_seconds": 300
     }
   }
 }

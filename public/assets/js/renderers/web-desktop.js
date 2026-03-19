@@ -506,7 +506,17 @@ window.SensorPanel.renderers = window.SensorPanel.renderers || {};
     return card;
   }
 
-  function renderWebEmbed(component) {
+  function createEmbedIframe(url) {
+    const iframe = document.createElement("iframe");
+    iframe.src = url;
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "no-referrer-when-downgrade";
+    iframe.setAttribute("frameborder", "0");
+    iframe.className = "embed-frame";
+    return iframe;
+  }
+
+  function renderWebEmbed(component, renderContext) {
     const card = el("section", "card");
     card.appendChild(el("h3", "", componentTitle(component)));
 
@@ -516,13 +526,14 @@ window.SensorPanel.renderers = window.SensorPanel.renderers || {};
       return card;
     }
 
+    const embedKey = renderContext?.componentKey || component.component || url;
+    const existingEmbed = renderContext?.reusableEmbeds?.get(embedKey);
+
     const frameWrap = el("div", "embed-wrap");
-    const iframe = document.createElement("iframe");
-    iframe.src = url;
-    iframe.loading = "lazy";
-    iframe.referrerPolicy = "no-referrer-when-downgrade";
-    iframe.setAttribute("frameborder", "0");
-    iframe.className = "embed-frame";
+    frameWrap.dataset.embedKey = embedKey;
+    frameWrap.dataset.embedUrl = url;
+
+    const iframe = existingEmbed?.src === url ? existingEmbed.iframe : createEmbedIframe(url);
 
     frameWrap.appendChild(iframe);
     card.appendChild(frameWrap);
@@ -602,7 +613,7 @@ window.SensorPanel.renderers = window.SensorPanel.renderers || {};
     return card;
   }
 
-  function renderComponent(component) {
+  function renderComponent(component, renderContext) {
     switch (component.type) {
       case "outside_summary":
         return renderOutsideSummary(component);
@@ -615,7 +626,7 @@ window.SensorPanel.renderers = window.SensorPanel.renderers || {};
       case "map_panel":
         return renderMapPanel(component);
       case "web_embed":
-        return renderWebEmbed(component);
+        return renderWebEmbed(component, renderContext);
       case "wind_compass":
         return renderWindCompass(component);
       default:
@@ -630,23 +641,45 @@ function renderWindCompass(component) {
   return card;
 }
 
-  function renderScreen(screenModel, mountNode) {
-    mountNode.innerHTML = "";
+  function collectReusableEmbeds(mountNode) {
+    const reusableEmbeds = new Map();
 
+    for (const frameWrap of mountNode.querySelectorAll(".embed-wrap[data-embed-key]")) {
+      const embedKey = frameWrap.dataset.embedKey;
+      const iframe = frameWrap.querySelector("iframe.embed-frame");
+
+      if (!embedKey || !iframe) {
+        continue;
+      }
+
+      reusableEmbeds.set(embedKey, {
+        iframe,
+        src: frameWrap.dataset.embedUrl || iframe.getAttribute("src") || ""
+      });
+    }
+
+    return reusableEmbeds;
+  }
+
+  function renderScreen(screenModel, mountNode) {
     applyThemeTokens(screenModel.theme?.tokens || {});
 
+    const reusableEmbeds = collectReusableEmbeds(mountNode);
     const screen = el("main", `screen layout-${screenModel.screen.layout}`);
     const regions = screenModel.regions || {};
 
     for (const [regionName, components] of Object.entries(regions)) {
       const region = el("section", `region region-${regionName}`);
-      for (const component of components) {
-        region.appendChild(renderComponent(component));
-      }
+      components.forEach((component, index) => {
+        region.appendChild(renderComponent(component, {
+          reusableEmbeds,
+          componentKey: `${regionName}:${component.component || component.type}:${index}`
+        }));
+      });
       screen.appendChild(region);
     }
 
-    mountNode.appendChild(screen);
+    mountNode.replaceChildren(screen);
   }
 
   function renderDevice(deviceModel, mountNode) {
