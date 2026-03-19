@@ -32,6 +32,8 @@ BUC is meant for people who want to build things like:
 
 It is especially useful when you want more control over layout, rendering, and visual behavior than a standard dashboard normally gives you.
 
+<img src="docs/BUC-1024.jpg" width="320" alt="hardware mockup">
+
 ## Why it may be useful to you
 
 BUC is built around a simple idea:
