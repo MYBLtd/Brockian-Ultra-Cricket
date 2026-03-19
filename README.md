@@ -4,7 +4,7 @@
 
 ## Why this exists
 
-At some point, a lot of Home Assistant setups hit the same wall:
+At some point, many Home Assistant setups hit the same wall:
 
 - the data is there
 - the automations work
@@ -45,16 +45,6 @@ If your system already knows things, BUC helps present them in a way that is:
 - more device-aware
 - more visually consistent
 - easier to evolve into something purpose-built
-
-In practice, that means you can start with a browser screen and grow toward:
-
-- panel UIs
-- alternative dashboards
-- lightweight players
-- server-rendered visuals
-- dedicated operator screens
-
-without rebuilding everything from scratch every time.
 
 ## What makes it different
 
@@ -101,4 +91,3 @@ That is part of the point.
 ## In one sentence
 
 **BUC exists to give serious tinkerers, builders, and system integrators more control over how their systems are actually seen.**
-
