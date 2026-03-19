@@ -31,3 +31,4 @@ AGENTS.md
 # Generated caches
 .cache/
 
+.ssh/
