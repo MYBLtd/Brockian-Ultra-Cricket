@@ -20,6 +20,11 @@ BUC is not:
 - a theme pack
 - a one-off dashboard for a single installation
 
+## Security boundary
+
+BUC should be understood as a presentation layer, not as a security boundary.
+
+It is designed to render and organize information, not to act as a hardened public-facing access gateway. Authentication, remote access protection, and exposure to untrusted networks should be handled by the surrounding infrastructure.
 It may be used with Home Assistant, but it is intended to sit above the data layer, not replace it.
 
 ## Why BUC exists

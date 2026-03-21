@@ -42,6 +42,13 @@
         "daily_forecast_main"
         ]
       }
-   }
+   },
+    "climate_dashboard_main": {
+      "layout": "mobile_stack",
+      "title": "Climate Dashboard Main",
+      "regions": {
+        "main": ["climate_overview_main"]
+      }
+    }
   }
 }

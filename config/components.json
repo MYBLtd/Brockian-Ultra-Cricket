@@ -28,6 +28,15 @@
         "style_variant": "panel"
       }
     },
+    "climate_overview_main": {
+      "type": "climate_overview",
+      "source": "indoor_payload",
+      "options": {
+        "temperature_decimals": 1,
+        "humidity_decimals": 0,
+        "style_variant": "panel"
+      }
+    },
     "wind_strip_main": {
       "type": "wind_strip",
       "source": "weather_hourly",

@@ -298,6 +298,74 @@ body {
   color: var(--text-secondary);
 }
 
+/* CLIMATE OVERVIEW */
+
+.climate-overview {
+  display: grid;
+  gap: 14px;
+  padding: 12px;
+}
+
+.climate-zone {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+}
+
+.climate-zone-title {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.climate-room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.climate-room-card {
+  display: grid;
+  gap: 6px;
+  min-height: 112px;
+  padding: 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  align-content: start;
+}
+
+.climate-room-name {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.climate-room-temp {
+  font-size: 1.38rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #f3f6fb;
+}
+
+.climate-room-temp-warm {
+  color: #e2b06a;
+}
+
+.climate-room-temp-cool {
+  color: #8ec5f0;
+}
+
+.climate-room-humidity {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
 /* MAP PANEL */
 
 .map-panel-wrap {

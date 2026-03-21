@@ -33,6 +33,28 @@
         "height": 932
       },
       "refresh_seconds": 300
-    }
+    },
+    "climate_browser": {
+      "mode": "web",
+      "screen": "climate_dashboard_main",
+      "theme": "dark_default",
+      "orientation": "landscape",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "refresh_seconds": 300
+    },
+    "climate_iphone_browser": {
+      "mode": "web",
+      "screen": "climate_dashboard_main",
+      "theme": "dark_default",
+      "orientation": "portrait",
+      "resolution": {
+        "width": 430,
+        "height": 932
+      },
+      "refresh_seconds": 300
+}
   }
 }

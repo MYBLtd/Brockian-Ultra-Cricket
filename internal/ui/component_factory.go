@@ -20,6 +20,8 @@ func BuildComponent(
 		return BuildWindStrip(cfg, themeName, componentName, componentCfg.Type, componentCfg.Source, sourceData, componentCfg.Options), nil
 	case "daily_forecast":
 		return BuildDailyForecast(cfg, themeName, componentName, componentCfg.Type, componentCfg.Source, sourceData, componentCfg.Options), nil
+	case "climate_overview":
+		return BuildClimateOverview(cfg, themeName, componentName, componentCfg.Type, componentCfg.Source, sourceData, componentCfg.Options), nil
 	default:
 		return ComponentEnvelope{
 			Component: componentName,

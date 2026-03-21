@@ -93,3 +93,9 @@ That is part of the point.
 ## In one sentence
 
 **BUC exists to give serious tinkerers, builders, and system integrators more control over how their systems are actually seen.**
+
+** Final thought and Warning **
+BUC is currently not designed as a hardened public internet frontend.
+It does not provide built-in authentication, authorization, or secure remote access features.
+If you use BUC outside a trusted local environment, place it behind appropriate access controls such as a VPN, reverse proxy, authentication layer, or other protective infrastructure.
+

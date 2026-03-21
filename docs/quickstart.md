@@ -83,3 +83,8 @@ For now, this document exists to make one thing clear:
 
 **BUC can start small, and it should.**
 
+## Deployment note
+
+The simplest and safest BUC deployment model is a trusted local network.
+
+If remote access is required, BUC should be placed behind an appropriate access control layer such as a VPN or an authenticated reverse proxy. Direct public exposure without additional protection is not recommended.

@@ -15,6 +15,23 @@ window.SensorPanel.renderers = window.SensorPanel.renderers || {};
   const componentTitle = model.componentTitle;
   const SVG_NS = "http://www.w3.org/2000/svg";
   let windLevelStripSeq = 0;
+  const CLIMATE_ZONE_ORDER = ["Outside", "Floor -1", "Floor 0", "Floor 1", "Other"];
+  const CLIMATE_ZONE_BY_KEY = {
+    outdoor: "Outside",
+    servers: "Floor -1",
+    laundry: "Floor -1",
+    dungeon: "Floor -1",
+    mancave: "Floor -1",
+    garage: "Floor -1",
+    kitchen: "Floor 0",
+    living: "Floor 0",
+    library: "Floor 0",
+    sunroom: "Floor 0",
+    office: "Floor 1",
+    bathroom: "Floor 1",
+    bedroom: "Floor 1",
+    wardrobe: "Floor 1"
+  };
 
   function gustColorClass(value) {
     const v = Number(value);
@@ -581,6 +598,103 @@ window.SensorPanel.renderers = window.SensorPanel.renderers || {};
     return card;
   }
 
+  function climateZoneForTile(tile) {
+    const key = String(tile?.key || "").trim().toLowerCase();
+    if (!key || key === "empty") return null;
+    return CLIMATE_ZONE_BY_KEY[key] || "Other";
+  }
+
+  function collectClimateZones(component) {
+    const zones = new Map();
+    const tiles = Array.isArray(component.data?.tiles) ? component.data.tiles : [];
+
+    for (const zoneName of CLIMATE_ZONE_ORDER) {
+      zones.set(zoneName, []);
+    }
+
+    for (const tile of tiles) {
+      if (!tile || typeof tile !== "object") continue;
+
+      const zoneName = climateZoneForTile(tile);
+      if (!zoneName) continue;
+
+      const zoneItems = zones.get(zoneName) || [];
+      zoneItems.push(tile);
+      zones.set(zoneName, zoneItems);
+    }
+
+    return CLIMATE_ZONE_ORDER
+      .map((zoneName) => ({
+        name: zoneName,
+        tiles: (zones.get(zoneName) || []).sort((a, b) => {
+          const pageDelta = Number(a?.page || 0) - Number(b?.page || 0);
+          if (pageDelta !== 0) return pageDelta;
+
+          const rowDelta = Number(a?.row || 0) - Number(b?.row || 0);
+          if (rowDelta !== 0) return rowDelta;
+
+          const colDelta = Number(a?.col || 0) - Number(b?.col || 0);
+          if (colDelta !== 0) return colDelta;
+
+          return String(a?.label || a?.key || "").localeCompare(String(b?.label || b?.key || ""));
+        })
+      }))
+      .filter((zone) => zone.tiles.length > 0);
+  }
+
+  function renderClimateOverview(component) {
+    const card = el("section", "card climate-overview");
+    card.appendChild(el("h3", "", "Binnenklimaat"));
+
+    const zones = collectClimateZones(component);
+    if (!zones.length) {
+      card.appendChild(el("div", "placeholder", "Geen binnenklimaatdata gevonden"));
+      return card;
+    }
+
+    const decimalsTemp = Number(component.options?.temperature_decimals);
+    const decimalsHum = Number(component.options?.humidity_decimals);
+    const tempDecimals = Number.isFinite(decimalsTemp) ? decimalsTemp : 1;
+    const humDecimals = Number.isFinite(decimalsHum) ? decimalsHum : 0;
+
+    for (const zone of zones) {
+      const section = el("section", "climate-zone");
+      section.appendChild(el("div", "climate-zone-title", zone.name));
+
+      const grid = el("div", "climate-room-grid");
+
+      for (const tile of zone.tiles) {
+        const room = el("article", "climate-room-card");
+        const roomName = String(tile?.label || tile?.key || "—");
+        const tempUnit = String(tile?.temp_unit || "°C");
+        const humUnit = String(tile?.hum_unit || "%");
+        const tempValue = tile?.temp != null ? `${formatFixed(tile.temp, tempDecimals)} ${tempUnit}` : "—";
+        const humValue = tile?.hum != null ? `${humDecimals > 0 ? formatFixed(tile.hum, humDecimals) : formatInt(tile.hum)} ${humUnit}` : "—";
+
+        room.appendChild(el("div", "climate-room-name", roomName));
+
+        const tempLine = el("div", "climate-room-temp", tempValue);
+        const tempNumeric = Number(tile?.temp);
+        if (Number.isFinite(tempNumeric)) {
+          if (tempNumeric >= 24) {
+            tempLine.classList.add("climate-room-temp-warm");
+          } else if (tempNumeric <= 18) {
+            tempLine.classList.add("climate-room-temp-cool");
+          }
+        }
+        room.appendChild(tempLine);
+
+        room.appendChild(el("div", "climate-room-humidity", humValue));
+        grid.appendChild(room);
+      }
+
+      section.appendChild(grid);
+      card.appendChild(section);
+    }
+
+    return card;
+  }
+
   function renderMapPanel(component) {
     const card = el("section", "card");
     card.appendChild(el("h3", "", "Kaart"));
@@ -623,6 +737,8 @@ window.SensorPanel.renderers = window.SensorPanel.renderers || {};
         return renderDailyForecast(component);
       case "indoor_grid":
         return renderIndoorGrid(component);
+      case "climate_overview":
+        return renderClimateOverview(component);
       case "map_panel":
         return renderMapPanel(component);
       case "web_embed":
